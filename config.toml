@@ -1,0 +1,58 @@
+[dashboard]
+title = "GruvBoard"
+host = "127.0.0.1"
+port = 9500
+poll_interval_seconds = 30
+metrics_history_days = 30
+
+[[apps]]
+id = "ollama"
+name = "Ollama"
+icon = "brain"
+url = "http://localhost:11434"
+health_endpoint = "/api/version"
+health_method = "GET"
+expected_status = 200
+systemd_unit = "ollama.service"
+widget = "ollama"
+tags = ["ai", "llm"]
+category = "AI & ML"
+
+[[apps]]
+id = "open-webui"
+name = "Open WebUI"
+icon = "message-square"
+url = "http://localhost:3000"
+health_endpoint = "/"
+health_method = "GET"
+expected_status = 200
+systemd_unit = "open-webui.service"
+widget = "generic"
+tags = ["ai", "chat"]
+category = "AI & ML"
+
+[[apps]]
+id = "caddy"
+name = "Caddy"
+icon = "shield"
+url = "http://localhost:2019"
+health_endpoint = "/config/"
+health_method = "GET"
+expected_status = 200
+systemd_unit = "caddy.service"
+widget = "caddy"
+tags = ["proxy", "web"]
+category = "Infrastructure"
+
+[[apps]]
+id = "jellyfin"
+name = "Jellyfin"
+icon = "tv"
+url = "http://localhost:8096"
+health_endpoint = "/health"
+health_method = "GET"
+expected_status = 200
+systemd_unit = "jellyfin.service"
+widget = "generic"
+tags = ["media"]
+category = "Media"
