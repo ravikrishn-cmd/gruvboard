@@ -20,7 +20,7 @@ const borderColors = {
 };
 
 function getIcon(iconName: string) {
-  const icons = LucideIcons as Record<string, React.ComponentType<{ className?: string }>>;
+  const icons = LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string }>>;
   // Convert kebab-case to PascalCase
   const pascalName = iconName
     .split("-")
