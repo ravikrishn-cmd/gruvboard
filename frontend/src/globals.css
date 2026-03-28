@@ -1,0 +1,128 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Gruvbox Dark Palette */
+  --bg: #282828;
+  --bg-hard: #1d2021;
+  --bg1: #3c3836;
+  --bg2: #504945;
+  --bg3: #665c54;
+  --bg4: #7c6f64;
+
+  --fg: #ebdbb2;
+  --fg1: #d5c4a1;
+  --fg2: #bdae93;
+  --fg3: #a89984;
+
+  --red: #fb4934;
+  --green: #b8bb26;
+  --yellow: #fabd2f;
+  --blue: #83a598;
+  --aqua: #8ec07c;
+  --orange: #fe8019;
+  --purple: #d3869b;
+
+  --red-dim: #cc241d;
+  --green-dim: #98971a;
+  --yellow-dim: #d79921;
+  --blue-dim: #458588;
+  --aqua-dim: #689d6a;
+  --orange-dim: #d65d0e;
+  --purple-dim: #b16286;
+
+  /* shadcn/ui CSS variable mapping to Gruvbox */
+  --radius: 0.5rem;
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --card: var(--bg1);
+  --card-foreground: var(--fg);
+  --popover: var(--bg1);
+  --popover-foreground: var(--fg);
+  --primary: var(--blue);
+  --primary-foreground: var(--bg);
+  --secondary: var(--bg2);
+  --secondary-foreground: var(--fg);
+  --muted: var(--bg2);
+  --muted-foreground: var(--fg2);
+  --accent: var(--bg2);
+  --accent-foreground: var(--fg);
+  --destructive: var(--red);
+  --destructive-foreground: var(--bg);
+  --border: var(--bg2);
+  --input: var(--bg2);
+  --ring: var(--blue);
+  --chart-1: var(--blue);
+  --chart-2: var(--aqua);
+  --chart-3: var(--orange);
+  --chart-4: var(--purple);
+  --chart-5: var(--yellow);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-card: var(--bg1);
+  --color-card-foreground: var(--fg);
+  --color-popover: var(--bg1);
+  --color-popover-foreground: var(--fg);
+  --color-primary: var(--blue);
+  --color-primary-foreground: var(--bg);
+  --color-secondary: var(--bg2);
+  --color-secondary-foreground: var(--fg);
+  --color-muted: var(--bg2);
+  --color-muted-foreground: var(--fg2);
+  --color-accent: var(--bg2);
+  --color-accent-foreground: var(--fg);
+  --color-destructive: var(--red);
+  --color-destructive-foreground: var(--bg);
+  --color-border: var(--bg2);
+  --color-input: var(--bg2);
+  --color-ring: var(--blue);
+  --color-chart-1: var(--blue);
+  --color-chart-2: var(--aqua);
+  --color-chart-3: var(--orange);
+  --color-chart-4: var(--purple);
+  --color-chart-5: var(--yellow);
+  --radius: 0.5rem;
+
+  --color-grv-bg: var(--bg);
+  --color-grv-bg-hard: var(--bg-hard);
+  --color-grv-bg1: var(--bg1);
+  --color-grv-bg2: var(--bg2);
+  --color-grv-bg3: var(--bg3);
+  --color-grv-bg4: var(--bg4);
+  --color-grv-fg: var(--fg);
+  --color-grv-fg1: var(--fg1);
+  --color-grv-fg2: var(--fg2);
+  --color-grv-fg3: var(--fg3);
+  --color-grv-red: var(--red);
+  --color-grv-green: var(--green);
+  --color-grv-yellow: var(--yellow);
+  --color-grv-blue: var(--blue);
+  --color-grv-aqua: var(--aqua);
+  --color-grv-orange: var(--orange);
+  --color-grv-purple: var(--purple);
+  --color-grv-red-dim: var(--red-dim);
+  --color-grv-green-dim: var(--green-dim);
+  --color-grv-yellow-dim: var(--yellow-dim);
+  --color-grv-blue-dim: var(--blue-dim);
+  --color-grv-aqua-dim: var(--aqua-dim);
+  --color-grv-orange-dim: var(--orange-dim);
+  --color-grv-purple-dim: var(--purple-dim);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+code, pre, .font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
