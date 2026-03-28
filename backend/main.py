@@ -55,6 +55,7 @@ async def lifespan(app: FastAPI):
 
     event_bus = EventBus()
     http_client = httpx.AsyncClient()
+    insecure_client = httpx.AsyncClient(verify=False)
     health_cache: dict[str, HealthStatus] = {}
 
     # Register routers
@@ -68,7 +69,7 @@ async def lifespan(app: FastAPI):
         while True:
             for app_config in config.apps:
                 try:
-                    result = await check_app_health(app_config, http_client)
+                    result = await check_app_health(app_config, http_client, insecure_client)
                     previous = health_cache.get(app_config.id)
                     health_cache[app_config.id] = result
 
@@ -161,6 +162,7 @@ async def lifespan(app: FastAPI):
         task.cancel()
     await asyncio.gather(*tasks, return_exceptions=True)
     await http_client.aclose()
+    await insecure_client.aclose()
     await systemd.disconnect()
     await db.close()
     logger.info("GruvBoard shut down")

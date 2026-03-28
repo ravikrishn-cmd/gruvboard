@@ -28,20 +28,20 @@ def determine_health_status(
 
 
 async def check_app_health(
-    app: AppConfig, client: httpx.AsyncClient
+    app: AppConfig,
+    client: httpx.AsyncClient,
+    insecure_client: httpx.AsyncClient | None = None,
 ) -> HealthStatus:
     now = datetime.now(timezone.utc).isoformat()
     try:
         start = time.monotonic()
         base_url = app.effective_health_url
-        kwargs: dict = {
-            "method": app.health_method,
-            "url": f"{base_url}{app.health_endpoint}",
-            "timeout": 10.0,
-        }
-        if not app.verify_ssl:
-            kwargs["verify"] = False
-        response = await client.request(**kwargs)
+        use_client = insecure_client if (not app.verify_ssl and insecure_client) else client
+        response = await use_client.request(
+            method=app.health_method,
+            url=f"{base_url}{app.health_endpoint}",
+            timeout=10.0,
+        )
         elapsed_ms = int((time.monotonic() - start) * 1000)
 
         status = determine_health_status(
