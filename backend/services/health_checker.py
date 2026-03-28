@@ -33,11 +33,15 @@ async def check_app_health(
     now = datetime.now(timezone.utc).isoformat()
     try:
         start = time.monotonic()
-        response = await client.request(
-            method=app.health_method,
-            url=f"{app.url}{app.health_endpoint}",
-            timeout=10.0,
-        )
+        base_url = app.effective_health_url
+        kwargs: dict = {
+            "method": app.health_method,
+            "url": f"{base_url}{app.health_endpoint}",
+            "timeout": 10.0,
+        }
+        if not app.verify_ssl:
+            kwargs["verify"] = False
+        response = await client.request(**kwargs)
         elapsed_ms = int((time.monotonic() - start) * 1000)
 
         status = determine_health_status(

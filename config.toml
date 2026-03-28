@@ -22,7 +22,8 @@ category = "AI & ML"
 id = "open-webui"
 name = "Open WebUI"
 icon = "message-square"
-url = "http://localhost:3000"
+url = "https://openwebui.home"
+health_url = "http://localhost:8080"
 health_endpoint = "/"
 health_method = "GET"
 expected_status = 200
@@ -30,6 +31,43 @@ systemd_unit = "open-webui.service"
 widget = "generic"
 tags = ["ai", "chat"]
 category = "AI & ML"
+
+[[apps]]
+id = "milvus"
+name = "Milvus"
+icon = "database"
+url = "https://milvus.home"
+health_url = "http://localhost:9091"
+health_endpoint = "/healthz"
+health_method = "GET"
+expected_status = 200
+tags = ["vector-db", "ai"]
+category = "AI & ML"
+
+[[apps]]
+id = "portainer"
+name = "Portainer"
+icon = "container"
+url = "https://portainer.home"
+health_url = "https://localhost:9443"
+health_endpoint = "/api/status"
+health_method = "GET"
+expected_status = 200
+verify_ssl = false
+tags = ["docker", "management"]
+category = "Infrastructure"
+
+[[apps]]
+id = "minio"
+name = "MinIO"
+icon = "hard-drive"
+url = "https://minio.home"
+health_url = "http://localhost:9000"
+health_endpoint = "/minio/health/live"
+health_method = "GET"
+expected_status = 200
+tags = ["storage", "s3"]
+category = "Infrastructure"
 
 [[apps]]
 id = "caddy"
@@ -43,16 +81,3 @@ systemd_unit = "caddy.service"
 widget = "caddy"
 tags = ["proxy", "web"]
 category = "Infrastructure"
-
-[[apps]]
-id = "jellyfin"
-name = "Jellyfin"
-icon = "tv"
-url = "http://localhost:8096"
-health_endpoint = "/health"
-health_method = "GET"
-expected_status = 200
-systemd_unit = "jellyfin.service"
-widget = "generic"
-tags = ["media"]
-category = "Media"

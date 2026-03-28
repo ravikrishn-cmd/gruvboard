@@ -53,7 +53,11 @@ def create_apps_router(
                 app.id,
                 HealthStatus(app_id=app.id, status="unknown"),
             )
-            systemd_status = await systemd.get_unit_status(app.systemd_unit)
+            systemd_status = (
+                await systemd.get_unit_status(app.systemd_unit)
+                if app.systemd_unit
+                else None
+            )
             results.append(
                 AppStatus(
                     app_id=app.id,
@@ -78,7 +82,11 @@ def create_apps_router(
             app_id,
             HealthStatus(app_id=app_id, status="unknown"),
         )
-        systemd_status = await systemd.get_unit_status(app.systemd_unit)
+        systemd_status = (
+            await systemd.get_unit_status(app.systemd_unit)
+            if app.systemd_unit
+            else None
+        )
         return AppStatus(
             app_id=app.id,
             name=app.name,

@@ -19,13 +19,19 @@ class AppConfig(BaseModel):
     name: str
     icon: str = "box"
     url: str
+    health_url: str = ""  # if set, used for health checks instead of url
     health_endpoint: str = "/"
     health_method: str = "GET"
     expected_status: int = 200
-    systemd_unit: str
+    verify_ssl: bool = True
+    systemd_unit: str = ""  # empty = not a systemd service (e.g. Docker)
     widget: str = "generic"
     tags: list[str] = Field(default_factory=list)
     category: str = "Uncategorized"
+
+    @property
+    def effective_health_url(self) -> str:
+        return self.health_url or self.url
 
 
 class GruvBoardConfig(BaseModel):

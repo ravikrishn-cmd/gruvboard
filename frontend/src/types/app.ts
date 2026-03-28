@@ -6,7 +6,7 @@ export interface AppConfig {
   category: string;
   tags: string[];
   widget: string;
-  systemd_unit: string;
+  systemd_unit: string; // empty string for non-systemd services (Docker)
 }
 
 export interface DashboardConfig {

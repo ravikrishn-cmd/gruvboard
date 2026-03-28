@@ -14,7 +14,7 @@ def create_services_router(
 
     def _validate_unit(unit: str) -> None:
         """Only allow controlling units that are in our config."""
-        allowed = {app.systemd_unit for app in config.apps}
+        allowed = {app.systemd_unit for app in config.apps if app.systemd_unit}
         if unit not in allowed:
             raise HTTPException(
                 status_code=403,
