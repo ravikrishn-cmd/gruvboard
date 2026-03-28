@@ -70,6 +70,19 @@ tags = ["storage", "s3"]
 category = "Infrastructure"
 
 [[apps]]
+id = "caddy-manager"
+name = "Caddy Manager"
+icon = "settings"
+url = "https://caddymanager.home"
+health_endpoint = "/"
+health_method = "GET"
+expected_status = 200
+verify_ssl = false
+widget = "generic"
+tags = ["proxy", "management"]
+category = "Infrastructure"
+
+[[apps]]
 id = "caddy"
 name = "Caddy"
 icon = "shield"
