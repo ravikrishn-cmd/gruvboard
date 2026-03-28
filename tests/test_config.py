@@ -1,6 +1,8 @@
 from pathlib import Path
+
 import pytest
-from backend.config import load_config, DashboardConfig, AppConfig, GruvBoardConfig
+
+from backend.config import GruvBoardConfig, load_config
 
 
 def test_load_config_returns_gruvboard_config(sample_config_path: Path):
