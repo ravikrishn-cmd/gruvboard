@@ -58,11 +58,16 @@ async def lifespan(app: FastAPI):
     insecure_client = httpx.AsyncClient(verify=False)
     health_cache: dict[str, HealthStatus] = {}
 
-    # Register routers
+    # Register routers (must happen before static mount)
     app.include_router(system_router)
     app.include_router(create_apps_router(config, db, systemd, health_cache, http_client))
     app.include_router(create_services_router(config, systemd))
     app.include_router(create_events_router(event_bus))
+
+    # Mount static files after routers so /api/* routes take priority
+    static_dir = Path(__file__).parent / "static"
+    if static_dir.exists():
+        app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="static")
 
     # Background tasks
     async def health_check_loop():
@@ -169,8 +174,3 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="GruvBoard", lifespan=lifespan)
-
-# Mount static files (built frontend) if the directory exists
-static_dir = Path(__file__).parent / "static"
-if static_dir.exists():
-    app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="static")

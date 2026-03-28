@@ -1,23 +1,19 @@
 [Unit]
 Description=GruvBoard - Homelab Dashboard
-After=network-online.target
+After=network-online.target docker.service
 Wants=network-online.target
 
 [Service]
 Type=simple
-User=gruvboard
-Group=gruvboard
-WorkingDirectory=/opt/gruvboard
-ExecStart=/opt/gruvboard/.venv/bin/uvicorn backend.main:app --host 127.0.0.1 --port 9500
+User=ravikrishn
+WorkingDirectory=/home/ravikrishn/Projects/gruvboard
+ExecStart=/home/ravikrishn/Projects/gruvboard/.venv/bin/uvicorn backend.main:app --host 127.0.0.1 --port 9500
 Restart=on-failure
 RestartSec=5
-Environment=GRUVBOARD_CONFIG=/opt/gruvboard/config.toml
+Environment=GRUVBOARD_CONFIG=/home/ravikrishn/Projects/gruvboard/config.toml
 
 # Security hardening
 NoNewPrivileges=true
-ProtectSystem=strict
-ProtectHome=true
-ReadWritePaths=/opt/gruvboard/data
 PrivateTmp=true
 
 [Install]
